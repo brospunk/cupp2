@@ -13,6 +13,11 @@ def inserisciNomi():
     while True:
         a = str(input("[+] Inserisci nome: "))
         if a == 'stop':
+            ribalta = input("[?] Vuoi aggiungere questi nomi invertiti? (si o no): ")
+            if ribalta == 'si':
+                l = [s[::-1] for s in (nomi)]
+                print("[+] Aggiungendo parole INVERTIRE: ", l)
+                nomi.extend(l)
             break
         else:
             nomi.append(a)
@@ -23,6 +28,11 @@ def inserisciAnni():
     while True:
         a = str(input("[+] Inserisci Anni: "))
         if a == 'stop':
+            ribalta = input("[?] Vuoi aggiungere questi anni invertiti? (si o no): ")
+            if ribalta == 'si':
+                l = [s[::-1] for s in (anni)]
+                print("[+] Aggiungendo parole INVERTIRE: ", l)
+                anni.extend(l)
             break
         else:
             anni.append(a)
