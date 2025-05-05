@@ -90,16 +90,17 @@ def generaWordlist():
         for anno in anni:
             for suff in suffissi:
                 # Inizia con nomi
+                wordlist.append(nome + nome)
                 wordlist.append(nome + anno)
                 wordlist.append(nome + suff)
                 wordlist.append(nome + anno + suff)
                 wordlist.append(nome + suff + anno)
                 # Inizia con anni
+                wordlist.append(anno + anno)
                 wordlist.append(anno + nome)
                 wordlist.append(anno + suff)
                 wordlist.append(anno + nome + suff)
                 wordlist.append(anno + suff + nome)
-                
                 # Inizia con suff
                 wordlist.append(suff + nome)
                 wordlist.append(suff + anno)
