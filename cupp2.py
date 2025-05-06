@@ -5,7 +5,7 @@ nomi = []
 anni = []
 #suffissi = list(string.punctuation) + list(string.digits) + list(string.ascii_letters) + ['123']
 suffissi = []
-wordlist = []
+wordlist = set()
 
 def inserisciNomi():
     global nomi
@@ -118,9 +118,10 @@ def generaWordlist():
     for nome in nomi:
         nome_plus.append(nome + nome)
     nomi = nomi + combo_nomi + nome_plus
-    print("nomi: ", nomi)
     del combo_nomi # Puliamo la ram
     del nome_plus # Puliamo la ram
+    print("Combo di nomi aggiunti: ", nomi)
+    print("LUNGHEZZA totale Nomi: ", len(nomi))
     '''
     while nomi:
         nome = nomi.pop(0)  # Prende ed elimina il primo elemento
@@ -145,9 +146,9 @@ def generaWordlist():
                 wordlist.append(suff + anno + nome)
         print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
     '''
-    generati = set()
     while nomi:
         nome = nomi.pop(0)
+        print("LUNGHEZZA Nomi MANCANTI...  : ", len(nomi))
         print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
         for anno in anni:
             for suff in suffissi:
@@ -169,10 +170,9 @@ def generaWordlist():
                 ]
                 while combinazioni:
                     parola = combinazioni.pop(0) # Liberiamo parte della memoria
-                    if parola not in generati:
-                        wordlist.append(parola)
-                        generati.add(parola)
-
+                    if parola not in wordlist:
+                        wordlist.add(parola)
+                        
 
     print("[+] Lista dizionario creata!")
     #print("[...] Eseguendo Sort nel dizionario!")
