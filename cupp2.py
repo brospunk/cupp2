@@ -45,11 +45,12 @@ def inserisciSuffissi():
     print("[3] Caratteri Speciali")
     print("[4] Lettere minuscole")
     print("[5] Lettere MAIUSCOLE")
+    print("[6] Caratteri più utilizzati")
     while True:
         try:
             choose = int(input("[?] Inserisci (-1 per dire di no): "))
             if choose == -1: break
-            elif choose < 6 and choose >= 0:
+            elif choose < 7 and choose >= 0:
                 suffissi = charset(scegli_charset=choose)
                 break
         except: continue
@@ -77,6 +78,8 @@ def charset(scegli_charset=0):
         return list(string.ascii_lowercase)
     elif scegli_charset == 5: # Solo lettere MAIUSCOLE
         return list(string.ascii_uppercase)
+    elif scegli_charset == 6: # Caratteri più utilizzati
+        return list("-" + "_" + " " + string.ascii_letters + string.digits)
     return None
 
 def generaSuffissi(lunghezza_min=1, lunghezza_max=None):
@@ -94,13 +97,37 @@ def generaSuffissi(lunghezza_min=1, lunghezza_max=None):
 
 
 def generaWordlist():
-    global nome, anni, suffissi, wordlist
+    global nomi, anni, suffissi, wordlist
     print("[...] Generando Wordlist")
+
+    '''
+    for r in range(2, len(nomi) + 1):  # da 2 nomi in su
+        for combo in itertools.permutations(nomi, r):  # nomi distinti
+            parola = ''.join(combo)
+            print("Nomi: ", parola)
+            wordlist.append(parola)
+            '''
+    
+    # solo coppie di nomi distinti
+    combo_nomi = list()
+    for combo in itertools.permutations(nomi, 2):
+        parola = ''.join(combo)
+        combo_nomi.append(parola)
+    
+    nome_plus = []
     for nome in nomi:
+        nome_plus.append(nome + nome)
+    nomi = nomi + combo_nomi + nome_plus
+    print("nomi: ", nomi)
+    del combo_nomi # Puliamo la ram
+    del nome_plus # Puliamo la ram
+    '''
+    while nomi:
+        nome = nomi.pop(0)  # Prende ed elimina il primo elemento
         for anno in anni:
             for suff in suffissi:
                 # Inizia con nomi
-                wordlist.append(nome + nome)
+                wordlist.append(nome)
                 wordlist.append(nome + anno)
                 wordlist.append(nome + suff)
                 wordlist.append(nome + anno + suff)
@@ -116,9 +143,41 @@ def generaWordlist():
                 wordlist.append(suff + anno)
                 wordlist.append(suff + nome + anno)
                 wordlist.append(suff + anno + nome)
+        print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
+    '''
+    generati = set()
+    while nomi:
+        nome = nomi.pop(0)
+        print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
+        for anno in anni:
+            for suff in suffissi:
+                combinazioni = [
+                    nome,
+                    nome + anno,
+                    nome + suff,
+                    nome + anno + suff,
+                    nome + suff + anno,
+                    anno + anno,
+                    anno + nome,
+                    anno + suff,
+                    anno + nome + suff,
+                    anno + suff + nome,
+                    suff + nome,
+                    suff + anno,
+                    suff + nome + anno,
+                    suff + anno + nome
+                ]
+                while combinazioni:
+                    parola = combinazioni.pop(0) # Liberiamo parte della memoria
+                    if parola not in generati:
+                        wordlist.append(parola)
+                        generati.add(parola)
+
+
     print("[+] Lista dizionario creata!")
-    print("[...] Eseguendo Sort nel dizionario!")
-    wordlist = set(wordlist)
+    #print("[...] Eseguendo Sort nel dizionario!")
+    #wordlist = set(wordlist)
+    print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
 
 def creaFileDizionario(nameFile):
     global wordlist
