@@ -190,11 +190,16 @@ def main():
     file_path_nome = input("[?] Inserisci nome del file per salvare il dizionario: ")
 
     inserisciNomi()
+    if len(nomi) == 0: nomi.append('')
     print("*" * 30)
+
     inserisciAnni()
+    if len(anni) == 0: anni.append('')
     print("*" * 30)
+    
     inserisciSuffissi()
     print("*" * 30)
+    
     generaSuffissi(lunghezza_max=2)
     print("*" * 30)
 
