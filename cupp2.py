@@ -181,9 +181,19 @@ def generaWordlist():
 
 def creaFileDizionario(nameFile):
     global wordlist
+    '''
     with open(nameFile, 'w') as f:
         for parola in wordlist:
             f.write(parola + '\n')
+    '''
+    with open(nameFile, 'w') as f:
+        cont = 0
+        while wordlist:
+            parola = wordlist.pop()  # rimuove e restituisce il primo elemento
+            f.write(parola + '\n')
+            cont += 1
+            print(f"\rSalvate: {cont}", end='', flush=True)
+    print()
 
 def main():
     global nomi, anni, suffissi, wordlist
