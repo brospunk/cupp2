@@ -187,13 +187,21 @@ def creaFileDizionario(nameFile):
             f.write(parola + '\n')
     '''
     with open(nameFile, 'w') as f:
-        cont = 0
+        cont, max = 0, len(wordlist)
         while wordlist:
             parola = wordlist.pop()  # rimuove e restituisce il primo elemento
             f.write(parola + '\n')
-            cont += 1
-            print(f"\rSalvate: {cont}", end='', flush=True)
+            #cont += 1
+            #progress(cont, max)
+            #print(f"\rSalvate: {cont}", end='', flush=True)
     print()
+
+def progress(percent=0, max=100, width=45):
+    left = width * percent // max
+    right = width - left
+    print('\r[', '#' * left, ' ' * right, ']',
+          f' {percent: .0f}%', sep='', end='', flush=True)
+
 
 def main():
     global nomi, anni, suffissi, wordlist
