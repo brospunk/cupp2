@@ -216,6 +216,7 @@ def main():
     print("*" * 30)
     
     inserisciSuffissi()
+    if len(suffissi) == 0: suffissi.append('')
     print("*" * 30)
     
     generaSuffissi(lunghezza_max=2)
