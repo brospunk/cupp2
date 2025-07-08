@@ -122,30 +122,7 @@ def generaWordlist():
     del nome_plus # Puliamo la ram
     print("Combo di nomi aggiunti: ", nomi)
     print("LUNGHEZZA totale Nomi: ", len(nomi))
-    '''
-    while nomi:
-        nome = nomi.pop(0)  # Prende ed elimina il primo elemento
-        for anno in anni:
-            for suff in suffissi:
-                # Inizia con nomi
-                wordlist.append(nome)
-                wordlist.append(nome + anno)
-                wordlist.append(nome + suff)
-                wordlist.append(nome + anno + suff)
-                wordlist.append(nome + suff + anno)
-                # Inizia con anni
-                wordlist.append(anno + anno)
-                wordlist.append(anno + nome)
-                wordlist.append(anno + suff)
-                wordlist.append(anno + nome + suff)
-                wordlist.append(anno + suff + nome)
-                # Inizia con suff
-                wordlist.append(suff + nome)
-                wordlist.append(suff + anno)
-                wordlist.append(suff + nome + anno)
-                wordlist.append(suff + anno + nome)
-        print("LUNGHEZZA lista Wordlist... : ", len(wordlist))
-    '''
+
     while nomi:
         nome = nomi.pop(0)
         print("LUNGHEZZA Nomi MANCANTI...  : ", len(nomi))
